@@ -328,7 +328,7 @@
     .cs-toggle .arrow { display: inline-block; transition: transform 0.3s; font-size: 1rem; }
     .case-study.open .arrow { transform: rotate(90deg); }
     .cs-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-    .case-study.open .cs-body { max-height: 900px; }
+    .case-study.open .cs-body { max-height: 2000px; }
     .cs-inner { padding: 0 3rem 3rem 7rem; }
     .cs-divider { height: 1px; background: var(--border); margin: 0 3rem 2.5rem; }
     .cs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
@@ -404,8 +404,9 @@
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .cs-header { grid-template-columns: 50px 1fr; padding: 2rem; }
       .cs-toggle { display: none; }
-      .cs-inner { padding: 0 2rem 2.5rem 2rem; }
+      .cs-inner { padding: 0 1.5rem 2.5rem 1.5rem; }
       .cs-grid { grid-template-columns: 1fr; }
+      .case-study.open .cs-body { max-height: 4000px; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
     @media (max-width: 600px) {
