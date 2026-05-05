@@ -396,22 +396,45 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      nav { padding: 1.2rem 2rem; }
-      nav ul { gap: 1.2rem; }
-      section { padding: 5rem 2rem; }
-      #hero { padding: 9rem 2rem 5rem; }
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1rem; }
+      nav ul a { font-size: 0.65rem; }
+      section { padding: 4rem 1.5rem; }
+      #hero { padding: 8rem 1.5rem 4rem; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-      .cs-header { grid-template-columns: 50px 1fr; padding: 2rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-card p { font-size: 0.95rem !important; }
+      .cs-header { grid-template-columns: 50px 1fr; padding: 1.5rem; }
       .cs-toggle { display: none; }
-      .cs-inner { padding: 0 1.5rem 2.5rem 1.5rem; }
+      .cs-inner { padding: 0 1.2rem 2rem 1.2rem; }
       .cs-grid { grid-template-columns: 1fr; }
+      .cs-block-text { font-size: 0.95rem; }
       .case-study.open .cs-body { max-height: 4000px; }
+      .section-title { font-size: 2.8rem; }
+      .section-sub { font-size: 1rem; }
+      .about-text { font-size: 1rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
     }
+
     @media (max-width: 600px) {
-      h1 { font-size: 4.5rem; }
+      nav { padding: 0.9rem 1.2rem; }
+      nav ul { gap: 0.8rem; }
+      nav ul a { font-size: 0.6rem; letter-spacing: 0.08em; }
+      h1 { font-size: 3.8rem; }
+      .hero-bio { font-size: 1rem; }
+      .hero-eyebrow { font-size: 0.68rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .skills-grid { grid-template-columns: 1fr; }
+      .stat-number { font-size: 2.8rem; }
+      .stat-label { font-size: 0.72rem; }
+      .section-title { font-size: 2.4rem; }
+      .cs-title { font-size: 1.5rem; }
+      .cs-block-text { font-size: 0.95rem; line-height: 1.75; }
+      .cs-block-label { font-size: 0.7rem; }
+      .body-text { font-size: 0.95rem; }
+      .btn { font-size: 0.7rem; padding: 0.75rem 1.5rem; }
+      section { padding: 3.5rem 1.2rem; }
+      #hero { padding: 7rem 1.2rem 3.5rem; }
     }
   </style>
   <!-- Google tag (gtag.js) -->
