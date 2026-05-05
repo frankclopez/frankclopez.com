@@ -644,7 +644,7 @@
   <!-- NAV -->
   <nav>
     <a href="#hero" class="nav-logo">Frank<span>.</span>Lopez</a>
-    <ul>
+    <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#work">Work</a></li>
@@ -652,7 +652,18 @@
       <li><a href="#teardown">Teardown</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#skills" onclick="toggleMenu()">Skills</a>
+    <a href="#work" onclick="toggleMenu()">Work</a>
+    <a href="#why" onclick="toggleMenu()">Why PM</a>
+    <a href="#teardown" onclick="toggleMenu()">Teardown</a>
+    <a href="#contact" onclick="toggleMenu()">Contact</a>
+  </div>
 
   <!-- HERO -->
   <section id="hero">
@@ -1065,6 +1076,16 @@
   </footer>
 
   <script>
+
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('open');
+    }
+    // Close menu when scrolling
+    window.addEventListener('scroll', () => {
+      document.getElementById('mobileMenu').classList.remove('open');
+    });
+
     function toggleCase(el) {
       el.classList.toggle('open');
     }
