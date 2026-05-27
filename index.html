@@ -973,7 +973,7 @@
       position: relative;
       overflow: hidden;
       transition: border-color 0.25s;
-      cursor: default;
+      cursor: pointer;
     }
     .why-card::before {
       content: '';
@@ -1026,50 +1026,43 @@
       margin-top: 1rem;
     }
 
-    /* MOBILE EXPANDABLE CARDS */
-    @media (max-width: 700px) {
-      .why-grid {
-        display: block;
+    /* DESKTOP - always show body */
+    @media (min-width: 701px) {
+      .why-card-body {
+        max-height: none !important;
+        overflow: visible !important;
+        opacity: 1 !important;
+        margin-top: 0 !important;
       }
+      .why-card { cursor: default; }
+      .why-quote { padding: 2.5rem 3rem; }
+      .why-quote-text { font-size: 1.8rem; }
+    }
+
+    /* MOBILE - collapse body, expand on tap */
+    @media (max-width: 700px) {
+      .why-grid { display: block; }
       .why-card {
-        cursor: pointer;
+        cursor: pointer !important;
         margin-bottom: 2px;
         padding: 1.5rem;
       }
       .why-card-body {
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
-        margin-top: 0;
+        max-height: 0 !important;
+        overflow: hidden !important;
+        opacity: 0 !important;
+        transition: max-height 0.5s ease, opacity 0.4s ease !important;
+        margin-top: 0 !important;
         font-size: 1rem;
         line-height: 1.8;
       }
       .why-card.expanded .why-card-body {
-        max-height: 600px;
-        opacity: 1;
-        margin-top: 1rem;
+        max-height: 800px !important;
+        opacity: 1 !important;
+        margin-top: 1rem !important;
       }
-      .why-card-toggle {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .why-card-toggle-icon {
-        font-family: 'DM Mono', monospace;
-        font-size: 1rem;
-        color: var(--accent);
-        transition: transform 0.3s;
-      }
-      .why-card.expanded .why-card-toggle-icon {
-        transform: rotate(45deg);
-      }
-      .why-quote {
-        padding: 1.5rem;
-      }
-      .why-quote-text {
-        font-size: 1.3rem;
-      }
+      .why-quote { padding: 1.5rem; }
+      .why-quote-text { font-size: 1.3rem; }
     }
   </style>
 
@@ -1129,47 +1122,79 @@
       </div>
 
       <!-- What is it -->
-      <div style="padding:2rem 3rem;border-bottom:1px solid var(--border);">
+      <div class="td-section-card" onclick="this.classList.toggle('expanded')" style="padding:2rem 3rem;border-bottom:1px solid var(--border);">
         <div style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--accent);margin-bottom:0.8rem;">The Product</div>
-        <p style="font-size:0.95rem;color:rgba(245,242,238,0.88);line-height:1.75;max-width:860px;">Yelp is a two-sided marketplace connecting consumers with local businesses. As a $100K/year advertiser for 9 years, I operated on both sides, as a business owner competing for leads and as a power user who understood the platform deeply.</p>
+        <p class="td-section-body" style="font-size:0.95rem;color:rgba(245,242,238,0.88);line-height:1.75;max-width:860px;">Yelp is a two-sided marketplace connecting consumers with local businesses. As a $100K/year advertiser for 9 years, I operated on both sides, as a business owner competing for leads and as a power user who understood the platform deeply.</p>
       </div>
 
-      <!-- What Works / What Doesn't in 2 col -->
-      <div class="teardown-two-col" style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);">
-        <!-- What Works -->
-        <div style="padding:2rem 2.5rem;border-right:1px solid var(--border);">
-          <div style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.16em;color:#44cc88;margin-bottom:1rem;">✓ What Works Well</div>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li class="td-expandable" onclick="this.classList.toggle('expanded')" style="font-size:0.9rem;color:rgba(245,242,238,0.85);line-height:1.7;padding:0.5rem 0;border-bottom:1px solid var(--border);cursor:pointer;"><strong style="color:var(--text);">High-intent demand generation</strong><span class="td-detail">, Attracts high-intent consumers actively looking to hire, leads convert far better than social or display ads.</span></li>
-            <li class="td-expandable" onclick="this.classList.toggle('expanded')" style="font-size:0.9rem;color:rgba(245,242,238,0.85);line-height:1.7;padding:0.5rem 0;border-bottom:1px solid var(--border);cursor:pointer;"><strong style="color:var(--text);">Competitive intelligence</strong><span class="td-detail">, Competitor click volume tracking gave me real-time market data to adjust pricing and ad spend daily.</span></li>
-            <li class="td-expandable" onclick="this.classList.toggle('expanded')" style="font-size:0.9rem;color:rgba(245,242,238,0.85);line-height:1.7;padding:0.5rem 0;border-bottom:1px solid var(--border);cursor:pointer;"><strong style="color:var(--text);">Budget elasticity</strong><span class="td-detail">, Increasing budget produced immediate lead volume gains, a clear signal of strong supply-demand matching.</span></li>
-            <li class="td-expandable" onclick="this.classList.toggle('expanded')" style="font-size:0.9rem;color:rgba(245,242,238,0.85);line-height:1.7;padding:0.5rem 0;border-bottom:1px solid var(--border);cursor:pointer;"><strong style="color:var(--text);">AI-powered quote requests</strong><span class="td-detail">, AI-powered quote intake made requests more precise, reducing back-and-forth and improving lead quality.</span></li>
-            <li class="td-expandable" onclick="this.classList.toggle('expanded')" style="font-size:0.9rem;color:rgba(245,242,238,0.85);line-height:1.7;padding:0.5rem 0;cursor:pointer;"><strong style="color:var(--text);">Business tools & trust signals</strong><span class="td-detail">, License verification, ratings, and social integration build trust at the exact moment customers are deciding who to hire.</span></li>
-          </ul>
+      <!-- What Works / What Doesn't - Card Style -->
+      <div style="padding:2rem 3rem;border-bottom:1px solid var(--border);">
+        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.16em;color:#44cc88;margin-bottom:1.2rem;">✓ What Works Well</div>
+        <div class="teardown-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="pm-solution-card" onclick="togglePmSolution(this)" style="background:var(--bg3);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#44cc88;"></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding-left:0.8rem;">High-Intent Demand Generation</div>
+            <p class="pm-solution-body" style="font-size:0.88rem;color:rgba(245,242,238,0.78);line-height:1.7;padding-left:0.8rem;">Attracts high-intent consumers actively looking to hire. Leads convert far better than social or display ads.</p>
+          </div>
+          <div class="pm-solution-card" onclick="togglePmSolution(this)" style="background:var(--bg3);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#44cc88;"></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding-left:0.8rem;">Competitive Intelligence</div>
+            <p class="pm-solution-body" style="font-size:0.88rem;color:rgba(245,242,238,0.78);line-height:1.7;padding-left:0.8rem;">Competitor click volume tracking gave me real-time market data to adjust pricing and ad spend daily.</p>
+          </div>
+          <div class="pm-solution-card" onclick="togglePmSolution(this)" style="background:var(--bg3);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#44cc88;"></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding-left:0.8rem;">Budget Elasticity</div>
+            <p class="pm-solution-body" style="font-size:0.88rem;color:rgba(245,242,238,0.78);line-height:1.7;padding-left:0.8rem;">Increasing budget produced immediate lead volume gains. A clear signal of strong supply and demand matching.</p>
+          </div>
+          <div class="pm-solution-card" onclick="togglePmSolution(this)" style="background:var(--bg3);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#44cc88;"></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding-left:0.8rem;">AI-Powered Quote Requests</div>
+            <p class="pm-solution-body" style="font-size:0.88rem;color:rgba(245,242,238,0.78);line-height:1.7;padding-left:0.8rem;">AI-powered quote intake made requests more precise, reducing back-and-forth and improving lead quality.</p>
+          </div>
+          <div class="pm-solution-card" onclick="togglePmSolution(this)" style="background:var(--bg3);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:#44cc88;"></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding-left:0.8rem;">Business Tools and Trust Signals</div>
+            <p class="pm-solution-body" style="font-size:0.88rem;color:rgba(245,242,238,0.78);line-height:1.7;padding-left:0.8rem;">License verification, ratings, and social integration build trust at the exact moment customers are deciding who to hire.</p>
+          </div>
         </div>
+      </div>
 
-        <!-- What Doesn't Work -->
-        <div style="padding:2rem 2.5rem;">
-          <div style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--accent);margin-bottom:1rem;">✗ What Needs Work</div>
-          <ul style="list-style:none;padding:0;margin:0;">
-            <li class="td-expandable" onclick="this.classList.toggle('expanded')" style="font-size:0.9rem;color:rgba(245,242,238,0.85);line-height:1.7;padding:0.5rem 0;border-bottom:1px solid var(--border);cursor:pointer;"><strong style="color:var(--text);">Lead list UX bug</strong><span class="td-detail">, After responding to a lead, the app resets to the top of the list instead of returning to where you were, a small bug with a big daily cost for high-volume businesses.</span></li>
-            <li class="td-expandable" onclick="this.classList.toggle('expanded')" style="font-size:0.9rem;color:rgba(245,242,238,0.85);line-height:1.7;padding:0.5rem 0;border-bottom:1px solid var(--border);cursor:pointer;"><strong style="color:var(--text);">Aggressive review filtering</strong><span class="td-detail">, Legitimate 5-star reviews removed as "non-organic" despite zero solicitation, penalizing honest businesses while bad actors find workarounds.</span></li>
-            <li class="td-expandable" onclick="this.classList.toggle('expanded')" style="font-size:0.9rem;color:rgba(245,242,238,0.85);line-height:1.7;padding:0.5rem 0;border-bottom:1px solid var(--border);cursor:pointer;"><strong style="color:var(--text);">Forced digital tracking number</strong><span class="td-detail">, Yelp-generated tracking numbers show on callbacks instead of your real number, customers don't answer, trust drops.</span></li>
-            <li class="td-expandable" onclick="this.classList.toggle('expanded')" style="font-size:0.9rem;color:rgba(245,242,238,0.85);line-height:1.7;padding:0.5rem 0;cursor:pointer;"><strong style="color:var(--text);">Hidden multi-bid feature</strong><span class="td-detail">, The multi-bid request feature, Yelp's core value prop, isn't prominent enough. Customers miss it constantly.</span></li>
-          </ul>
+      <div style="padding:2rem 3rem;border-bottom:1px solid var(--border);">
+        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--accent);margin-bottom:1.2rem;">✗ What Needs Work</div>
+        <div class="teardown-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div class="pm-solution-card" onclick="togglePmSolution(this)" style="background:var(--bg3);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);"></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding-left:0.8rem;">Lead List UX Bug</div>
+            <p class="pm-solution-body" style="font-size:0.88rem;color:rgba(245,242,238,0.78);line-height:1.7;padding-left:0.8rem;">After responding to a lead, the app resets to the top of the list instead of returning to where you were. A small bug with a big daily cost for high-volume businesses.</p>
+          </div>
+          <div class="pm-solution-card" onclick="togglePmSolution(this)" style="background:var(--bg3);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);"></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding-left:0.8rem;">Aggressive Review Filtering</div>
+            <p class="pm-solution-body" style="font-size:0.88rem;color:rgba(245,242,238,0.78);line-height:1.7;padding-left:0.8rem;">Legitimate 5-star reviews removed as non-organic despite zero solicitation. Penalizing honest businesses while bad actors find workarounds.</p>
+          </div>
+          <div class="pm-solution-card" onclick="togglePmSolution(this)" style="background:var(--bg3);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);"></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding-left:0.8rem;">Forced Digital Tracking Number</div>
+            <p class="pm-solution-body" style="font-size:0.88rem;color:rgba(245,242,238,0.78);line-height:1.7;padding-left:0.8rem;">Yelp-generated tracking numbers show on callbacks instead of your real number. Customers do not answer and trust drops.</p>
+          </div>
+          <div class="pm-solution-card" onclick="togglePmSolution(this)" style="background:var(--bg3);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);"></div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;padding-left:0.8rem;">Hidden Multi-Bid Feature</div>
+            <p class="pm-solution-body" style="font-size:0.88rem;color:rgba(245,242,238,0.78);line-height:1.7;padding-left:0.8rem;">The multi-bid request feature, Yelp's core value proposition, is not prominent enough in the consumer experience. Customers miss it constantly.</p>
+          </div>
         </div>
       </div>
 
       <!-- Opportunity -->
-      <div style="padding:2rem 3rem;border-bottom:1px solid var(--border);">
+      <div class="td-section-card" onclick="this.classList.toggle('expanded')" style="padding:2rem 3rem;border-bottom:1px solid var(--border);">
         <div style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--accent);margin-bottom:0.8rem;">The Biggest Opportunity</div>
-        <p style="font-size:0.95rem;color:rgba(245,242,238,0.88);line-height:1.75;max-width:860px;">Yelp's review filtering hurts the businesses that fund the platform. Authentic reviews get removed at scale while bad actors find workarounds. This erodes advertiser trust and threatens retention of Yelp's highest-value customers. If I were the PM, this is where I'd focus.</p>
+        <p class="td-section-body" style="font-size:0.95rem;color:rgba(245,242,238,0.88);line-height:1.75;max-width:860px;">Yelp's review filtering hurts the businesses that fund the platform. Authentic reviews get removed at scale while bad actors find workarounds. This erodes advertiser trust and threatens retention of Yelp's highest-value customers. If I were the PM, this is where I'd focus.</p>
       </div>
 
       <!-- PM Solutions -->
       <div style="padding:2rem 3rem;border-bottom:1px solid var(--border);">
         <div style="font-family:'DM Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--accent);margin-bottom:1.2rem;">If I Were the PM, My Solutions</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+        <div class="teardown-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
 
           <div class="pm-solution-card" onclick="togglePmSolution(this)" style="background:var(--bg);border:1px solid var(--border);padding:1.5rem;position:relative;overflow:hidden;">
             <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent);"></div>
@@ -1210,7 +1235,7 @@
       </div>
 
       <!-- Outcome bar -->
-      <div style="padding:1.5rem 3rem;background:rgba(255,77,0,0.06);border-left:3px solid var(--accent);">
+      <div class="td-outcome" style="padding:1.5rem 3rem;background:rgba(255,77,0,0.06);border-left:3px solid var(--accent);">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--accent);line-height:1;">$100K/Year Advertiser Perspective</div>
         <div style="font-size:0.85rem;color:var(--muted);margin-top:0.3rem;">9 years of daily use. $100K in annual ad spend. Hundreds of leads managed per month. This isn't surface-level critique, it's built from the inside.</div>
       </div>
@@ -1245,7 +1270,26 @@
       document.getElementById('mobileMenu').classList.remove('open');
     });
 
-    function toggleCase(el) {
+    
+    function toggleWhyCard(card) {
+      if (window.innerWidth <= 700) {
+        card.classList.toggle('expanded');
+      }
+    }
+
+    function toggleSkillCard(card) {
+      if (window.innerWidth <= 700) {
+        card.classList.toggle('expanded');
+      }
+    }
+
+    function togglePmSolution(card) {
+      if (window.innerWidth <= 700) {
+        card.classList.toggle('expanded');
+      }
+    }
+
+function toggleCase(el) {
       el.classList.toggle('open');
     }
     const reveals = document.querySelectorAll('.reveal');
@@ -1257,47 +1301,113 @@
     reveals.forEach(el => observer.observe(el));
   </script>
 
-
-    @media (max-width: 700px) {
-      .skill-card { cursor: pointer !important; }
-      .skill-card p { max-height: 0 !important; overflow: hidden !important; opacity: 0 !important; transition: max-height 0.5s ease, opacity 0.4s ease !important; margin-top: 0 !important; font-size: 1rem !important; line-height: 1.75 !important; }
-      .skill-card .skill-tags { max-height: 0 !important; overflow: hidden !important; opacity: 0 !important; transition: max-height 0.5s ease, opacity 0.4s ease !important; margin-top: 0 !important; }
-      .skill-card.expanded p { max-height: 400px !important; opacity: 1 !important; margin-top: 0.8rem !important; }
-      .skill-card.expanded .skill-tags { max-height: 200px !important; opacity: 1 !important; margin-top: 0.8rem !important; }
-      .skills-grid { grid-template-columns: 1fr !important; }
-    }
-    @media (min-width: 701px) {
-      .skill-card p { max-height: none !important; opacity: 1 !important; }
-      .skill-card .skill-tags { max-height: none !important; opacity: 1 !important; }
-    }
-    @media (max-width: 700px) {
-      /* Stack teardown two-col grids */
-      .teardown-two-col { display: block !important; }
-      .teardown-two-col > div { border-right: none !important; border-bottom: 1px solid var(--border) !important; padding: 1.5rem !important; }
-
-      /* PM solution cards expandable */
-      .pm-solution-card { cursor: pointer !important; }
-      .pm-solution-body { max-height: 0 !important; overflow: hidden !important; opacity: 0 !important; transition: max-height 0.5s ease, opacity 0.4s ease !important; margin-top: 0 !important; }
-      .pm-solution-card.expanded .pm-solution-body { max-height: 400px !important; opacity: 1 !important; margin-top: 0.8rem !important; }
-      .pm-solution-toggle { display: block !important; }
-      .pm-solution-icon { display: none !important; }
-
-      /* Teardown li items expandable */
-      .td-expandable { cursor: pointer !important; }
-      .td-expandable .td-detail { max-height: 0 !important; overflow: hidden !important; opacity: 0 !important; transition: max-height 0.5s ease, opacity 0.4s ease !important; }
-      .td-expandable.expanded .td-detail { max-height: 300px !important; opacity: 1 !important; margin-top: 0.5rem !important; }
-    }
-    @media (min-width: 701px) {
-      .pm-solution-body { max-height: none !important; opacity: 1 !important; }
-      .pm-solution-icon { display: none !important; }
-    }
 <style>
-    @media (max-width: 700px) {
-      .td-expandable .td-detail { display: none; }
-      .td-expandable.expanded .td-detail { display: inline; }
-      .td-expandable strong::after { content: " (tap to read)"; font-size: 0.7rem; color: var(--accent); font-weight: normal; font-family: "DM Mono", monospace; }
-      .td-expandable.expanded strong::after { content: " (tap to close)"; }
-    }
-    </style>
-    </body>
+/* ═══ TEARDOWN MOBILE EXPANDABLE ═══ */
+@media (max-width: 700px) {
+
+  /* Stack two-column grids */
+  .teardown-two-col { display: block !important; }
+  .teardown-two-col > div {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    padding: 1.2rem 1.5rem !important;
+  }
+
+  /* The Product & Biggest Opportunity - expandable */
+  .td-section-card {
+    cursor: pointer !important;
+    padding: 1.2rem 1.5rem !important;
+    border-bottom: 1px solid var(--border);
+  }
+  .td-section-card .td-section-body {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    transition: max-height 0.5s ease, opacity 0.4s ease !important;
+    margin-top: 0 !important;
+  }
+  .td-section-card.expanded .td-section-body {
+    max-height: 600px !important;
+    opacity: 1 !important;
+    margin-top: 0.8rem !important;
+  }
+
+  /* PM solution cards */
+  .pm-solution-card { cursor: pointer !important; }
+  .pm-solution-body {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    transition: max-height 0.5s ease, opacity 0.4s ease !important;
+    margin-top: 0 !important;
+  }
+  .pm-solution-card.expanded .pm-solution-body {
+    max-height: 400px !important;
+    opacity: 1 !important;
+    margin-top: 0.8rem !important;
+  }
+  .pm-solution-icon { display: none !important; }
+
+  /* Bottom outcome bar */
+  .td-outcome { padding: 1.2rem 1.5rem !important; }
+}
+
+/* DESKTOP - everything visible */
+@media (min-width: 701px) {
+  .td-section-card { cursor: default; }
+  .td-section-card .td-section-body {
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+  }
+
+  .pm-solution-body { max-height: none !important; opacity: 1 !important; }
+  .pm-solution-icon { display: none !important; }
+}
+</style>
+
+<style>
+@media (max-width: 700px) {
+  .pm-solution-card .pm-solution-body {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    transition: max-height 0.5s ease, opacity 0.4s ease !important;
+    margin-top: 0 !important;
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+  }
+  .pm-solution-card.expanded .pm-solution-body {
+    max-height: 500px !important;
+    opacity: 1 !important;
+    margin-top: 0.8rem !important;
+  }
+  .pm-solution-card {
+    cursor: pointer !important;
+    margin-bottom: 4px;
+  }
+}
+@media (min-width: 701px) {
+  .pm-solution-card .pm-solution-body {
+    max-height: none !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+  }
+}
+</style>
+<style>
+@media (max-width: 700px) {
+  .skill-card { cursor: pointer !important; }
+  .skill-card p { max-height: 0 !important; overflow: hidden !important; opacity: 0 !important; transition: max-height 0.5s ease, opacity 0.4s ease !important; margin-top: 0 !important; font-size: 1rem !important; line-height: 1.75 !important; }
+  .skill-card .skill-tags { max-height: 0 !important; overflow: hidden !important; opacity: 0 !important; transition: max-height 0.5s ease, opacity 0.4s ease !important; margin-top: 0 !important; }
+  .skill-card.expanded p { max-height: 400px !important; opacity: 1 !important; margin-top: 0.8rem !important; }
+  .skill-card.expanded .skill-tags { max-height: 200px !important; opacity: 1 !important; margin-top: 0.8rem !important; }
+  .skills-grid { grid-template-columns: 1fr !important; }
+}
+@media (min-width: 701px) {
+  .skill-card p { max-height: none !important; opacity: 1 !important; }
+  .skill-card .skill-tags { max-height: none !important; opacity: 1 !important; }
+}
+</style>
+</body>
 </html>
